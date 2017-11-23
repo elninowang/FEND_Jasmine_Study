@@ -19,3 +19,34 @@ describe('Address Book', function() {
         expect(addressBook.getContact(0)).not.toBeDefined();
     });
 });
+
+describe('Async Address Book', function() {
+    var addressBook = new AddressBook();
+
+    beforeEach(function(done) {
+        addressBook.getInitialContacts(function() {
+            done();
+        });
+    });
+
+    it('should grab initial contacts', function(done) {
+        expect(addressBook.initialComplete).toBe(true);
+        done();
+    });
+});
+
+describe('Simple Async Test Case', function() {
+    var value = 0;
+    
+    beforeEach(function(done) {
+        setTimeout(function() {
+            value ++;
+            done();
+        }, 1);
+    });
+
+    it("should support async execution of test preparation and expectations", function(done) {
+        expect(value).toBeGreaterThan(0);
+        done();
+    });
+});
